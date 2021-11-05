@@ -1,0 +1,45 @@
+services:
+  nginx:
+    container_name: nginx
+    image: nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - ./test/data.json:/usr/share/nginx/html/data:ro
+
+  kea-hook:
+    container_name: kea-hook
+    build:
+      context: .
+      dockerfile: test/Dockerfile
+    privileged: true
+    networks:
+      - default
+      - kea
+
+  dhtest:
+    container_name: dhtest
+    build:
+      context: test
+      dockerfile: Dockerfile.dhtest
+    privileged: true
+    networks:
+      - default
+      - kea
+    command: >
+      --interface eth1
+      --verbose
+      --timeout 30
+      --unicast
+      -c 82,hex,0103666f6f0203626172
+      -c 97,hex,525069340a  # Rpi4 guid
+
+networks:
+  kea:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.28.201.0/24
+          ip_range: 172.28.201.0/24
+          gateway: 172.28.201.1
+

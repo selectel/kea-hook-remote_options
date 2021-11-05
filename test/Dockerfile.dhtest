@@ -1,0 +1,32 @@
+FROM ubuntu:20.04 AS build
+ENV DEBIAN_FRONTEND noninteractive
+ARG Release=1.5
+
+WORKDIR /build
+
+RUN apt-get update && \
+    apt-get -y install \
+       wget \
+       make \
+       gcc && \
+    wget https://github.com/saravana815/dhtest/archive/refs/tags/v${Release}.tar.gz && \
+    tar zxf v${Release}.tar.gz && \
+    cd dhtest-${Release} && \
+    make
+
+
+FROM ubuntu:20.04
+LABEL description="Image to run dhtest"
+ARG Release=1.5
+
+COPY --from=build /build/dhtest-${Release}/dhtest /usr/local/bin/dhtest
+
+ENTRYPOINT ["/usr/local/bin/dhtest"]
+CMD [ \
+    "--interface", "eth1", \
+    "--verbose", \
+    "--timeout", "30", \
+    "-c", "82,hex,0103666f6f0203626172", \
+    "-c", "77,str,test", \
+    "--unicast" \
+]

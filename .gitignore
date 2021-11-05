@@ -1,0 +1,7 @@
+compile_commands.json
+src/*.o
+src/*.d
+kea-hook-weboptions.so
+src/weboptions_messages.cc
+src/weboptions_messages.h
+.cache

@@ -1,0 +1,25 @@
+$NAMESPACE isc::log
+
+% REMOPTS_LOAD remopts hooks library has been loaded
+This info message indicates that the remopts hooks library has been loaded.
+
+% REMOPTS_UNLOAD remopts hooks library has been unloaded
+This info message indicates that the remopts hooks library has been unloaded.
+
+% REMOPTS_LOAD_FAIL remopts hooks library load has failed with error %1
+This info message indicates that something went wrong during hooks library loading.
+
+% REMOPTS_PARAM_VALUE remopts config parameter %1 with value %2
+Debug message to inform about parameter value
+
+% REMOPTS_PKT4_RCV remopts pkt4_receive message %1: %2
+Debug message for pkt4_receive library
+
+% REMOPTS_MSG remopts message: %1
+A common message logger
+
+% REMOPTS_URL remopts url generation '%1'
+Url generation to make request by curl
+
+% REMOPTS_CURL remopts curl execution: %1
+Curl request execution
