@@ -21,7 +21,7 @@ OBJECTS = remopts_messages.o \
 		  version.o
 
 ../kea-hook-remote-opts.so: $(OBJECTS)
-	$(CXX) -o $@ $(CXXFLAGS) $(LDFLAGS) $(OBJECTS) -lcurl
+	$(CXX) -o $@ $(CXXFLAGS) $(OBJECTS) $(LDFLAGS)
 
 %.o: %.cc
 	$(CXX) -MMD -c $(CXXFLAGS) -o $@ $<
